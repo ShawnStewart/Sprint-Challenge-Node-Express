@@ -30,6 +30,19 @@ router.get('/:id', (req, res) => {
     });
 });
 
+router.get('/:id/actions', (req, res) => {
+  const { id } = req.params;
+
+  db
+    .get(id)
+    .then(project => {
+      res.json(project.actions);
+    })
+    .catch(err => {
+      res.status(404).json({ message: err_not_found});
+    });
+});
+
 router.post('/', (req, res) => {
   projectInfo = req.body;
 
